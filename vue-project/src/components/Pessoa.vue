@@ -3,7 +3,7 @@
         <h2>Descrição da pessoa: {{ nome }}</h2>
         <Info :email="email" :esta_trabalhando="esta_trabalhando"/>
         <Form />
-        <v-btn variant="elevated"> Button </v-btn>
+        <v-btn variant="elevated"> Botão </v-btn>
     </div>
 </template>
 
