@@ -1,8 +1,12 @@
 <template>
+  <div style="width:1600px; margin-left: -200px;">
     <v-data-table
       :headers="headers"
       :items="profissionais"
       :sort-by="[{ key: 'id', order: 'asc' }]"
+      height="625px"
+      fixed-header
+      hover="true"
     >
       <template v-slot:top>
         <v-toolbar>
@@ -114,26 +118,26 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
-                  color="blue-darken-1"
+                  color="red-darken-1"
                   variant="text"
                   @click="close"
                 >
-                  Cancel
+                  Cancelar
                 </v-btn>
                 <v-btn
-                  color="blue-darken-1"
+                  color="green-darken-1"
                   variant="text"
                   @click="save"
                 >
-                  Save
+                  Salvar
                 </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
 
-          <v-dialog v-model="dialogDelete" max-width="35%">
+          <v-dialog v-model="dialogDelete" max-width="600px">
             <v-card>
-              <v-card-title class="text-h5">Tem certeza que deseja excluir este profissional?</v-card-title>
+              <v-card-title class="text-button text-center">Tem certeza que deseja excluir este profissional?</v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="red-darken-1" variant="text" @click="closeDelete">Cancelar</v-btn>
@@ -164,14 +168,10 @@
       </template>
 
       <template v-slot:no-data>
-        <v-btn
-          color="primary"
-          @click="initialize"
-        >
-          Limpar
-        </v-btn>
+        <h1-text>Nenhum profissional cadastrado!</h1-text>
       </template>
     </v-data-table>
+  </div>
   </template>
 
 
@@ -195,7 +195,7 @@
         profissionais: [],
         editedIndex: -1,
         editedItem: {
-          id: 0,
+          id: '',
           nome: '',
           endereco: '',
           nascimento: '',
@@ -204,7 +204,7 @@
           especialidade: '',
         },
         defaultItem: {
-          id: 0,
+          id: '',
           nome: '',
           endereco: '',
           nascimento: '',
@@ -229,41 +229,15 @@
         },
       },
   
-      created () {
-        this.initialize()
+      async created () {
+        const response = await fetch("http://localhost:3000/profissionais");
+        const data = await response.json();
+        this.profissionais = data;
       },
   
       methods: {
         initialize () {
-          this.profissionais = [
-            {
-                id: 1,
-                nome: 'Jorge',
-                endereco: 'Rua Curitiba, 615',
-                nascimento: '12/1/1998',
-                genero: 'M',
-                raca: 'Ariana',
-                especialidade: 'Assassino',
-            },
-            {
-                id: 2,
-                nome: 'Maria Torres',
-                endereco: 'Avenida Paulista, 1000',
-                nascimento: '5/8/1990',
-                genero: 'F',
-                raca: 'Caucasiana',
-                especialidade: 'Engenheira'
-            },
-            {
-                id: 3,
-                nome: 'Pedro Silva',
-                endereco: 'Rua São Paulo, 200',
-                nascimento: '20/3/1985',
-                genero: 'M',
-                raca: 'Parda',
-                especialidade: 'Professor'
-            }
-          ]
+          this.profissionais = []
         },
   
         editItem (item) {

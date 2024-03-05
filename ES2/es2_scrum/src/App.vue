@@ -5,14 +5,15 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" /> -->
   
     <div class="wrapper">
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/profissionais">Profissionais</RouterLink>
+        <RouterLink to="/times">Times</RouterLink>
+        <RouterLink to="/projetos">Projetos</RouterLink>
       </nav>
 
     </div>
@@ -25,19 +26,15 @@ import { RouterLink, RouterView } from 'vue-router'
 <style scoped>
 header {
   line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+  max-height: 0vh;
 }
 
 nav {
-  width: 100%;
-  font-size: 12px;
+  width: 30%;
+  font-size: 10px;
   text-align: center;
-  margin-top: 2rem;
+  position: fixed;
+  top: 15px;
 }
 
 nav a.router-link-exact-active {
@@ -49,9 +46,8 @@ nav a.router-link-exact-active:hover {
 }
 
 nav a {
-  display: inline-block;
   padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+  border-left: 2px solid var(--color-border);
 }
 
 nav a:first-of-type {
@@ -61,27 +57,21 @@ nav a:first-of-type {
 @media (min-width: 1024px) {
   header {
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
+    place-items: flex-start;
   }
 
   header .wrapper {
     display: flex;
     place-items: flex-start;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    margin-left: -5px;
   }
 
   nav {
     text-align: left;
-    margin-left: -1rem;
+    margin-left: -10rem;
     font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
   }
 }
+
 </style>
